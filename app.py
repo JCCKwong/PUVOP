@@ -1,6 +1,9 @@
 import numpy as np
 import pandas as pd
 import streamlit as st
+import joblib
+from pathlib import Path
+from google_drive_downloader import GoogleDriveDownloader as gdd
 import SessionState
 
 def main():
@@ -53,6 +56,38 @@ def full_app(session_state):
     """
     )
 
+    # Load saved items from Google Drive
+    RRT_location = st.secrets['RRT']
+    EGFR_location = st.secrets['EGFR']
+    CKD_location = st.secrets['CKD']
+
+    @st.cache(allow_output_mutation=True)
+    def load_items():
+        save_dest = Path('model')
+        save_dest.mkdir(exist_ok=True)
+        RRT_checkpoint = Path('model/PUV RRT.pkl')
+        EGFR_checkpoint = Path('model/PUV eGFR.pkl')
+        CKD_checkpoint = Path('model/PUV CKD.pkl')
+
+        # download from Google Drive if model or features are not present
+        if not RRT_checkpoint.exists():
+            with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
+                gdd.download_file_from_google_drive(RRT_location, RRT_checkpoint)
+        if not EGFR_checkpoint.exists():
+            with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
+                gdd.download_file_from_google_drive(EGFR_location, EGFR_checkpoint)
+        if not CKD_checkpoint.exists():
+            with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
+                gdd.download_file_from_google_drive(CKD_location, CKD_checkpoint)
+
+        RRT_model = joblib.load(RRT_checkpoint)
+        EGFR_model = joblib.load(EGFR_checkpoint)
+        CKD_model = joblib.load(CKD_checkpoint)
+
+        return RRT_model, EGFR_model, CKD_model
+
+    RRT_model, EGFR_model, CKD_model = load_items()
+
     with st.sidebar:
         with st.form(key='my_form'):
             egfr = st.number_input('Baseline eGFR', 0, 1000, value=60, key=1)
@@ -84,6 +119,14 @@ def full_app(session_state):
     if submitted:
         st.write(class_features)
         st.write(reg_features)
+
+        prob_RRT = RRT_model.predict(class_features)[:,1]
+        prob_CKD = CKD_model.predict(class_features)[:,1]
+        pred_EGFR = EGFR_model.predict(reg_features)
+
+        st.write("Probability of any CKD progression: ", prob_CKD)
+        st.write("Probability of need for renal replacement therapy (dialysis or transplant): ", prob_RRT)
+        st.write(f"Predicted eGFR at {time_fu} months: {pred_EGFR} ml/min/1.73 m^2")
 
 if __name__ == "__main__":
     st.set_page_config(
