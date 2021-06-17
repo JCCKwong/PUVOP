@@ -57,7 +57,7 @@ def full_app(session_state):
         with st.form(key='my_form'):
             egfr = st.number_input('Baseline eGFR', 0, 1000, value=60, key=1)
             oligohydramnios = st.radio('Antenatal oligohydramnios', options=list({0: 'No', 1: 'Yes'}.keys()), index=1)
-            wt = st.number_input('Birth weight, in kg', 0, 50, value=2.8, key=1)
+            wt = st.number_input('Birth weight, in kg', 0.00, 50.00, value=2.80, key=1)
             ga = st.number_input('Gestational age, in weeks', 0, 50, value=37, key=1)
             renal_dysplasia = st.radio('Antenatal/Postnatal renal dysplasia', options=list({0: 'No', 1: 'Yes'}.keys()),
                                        index=0)
