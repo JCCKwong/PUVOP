@@ -124,9 +124,9 @@ def full_app(session_state):
         prob_CKD = CKD_model.predict_proba(class_features)[:,1]
         pred_EGFR = EGFR_model.predict(reg_features)
 
-        st.write("Probability of any CKD progression: ", str(round(prob_CKD,2)))
-        st.write("Probability of need for renal replacement therapy (dialysis or transplant): ", str(round(prob_RRT,2)))
-        st.write(f"Predicted eGFR at {time_fu} months: {str(round(pred_EGFR,2))} ml/min/1.73 m^2")
+        st.write("Probability of any CKD progression: ", str(np.round(prob_CKD,2)))
+        st.write("Probability of need for renal replacement therapy (dialysis or transplant): ", str(np.round(prob_RRT,2)))
+        st.write(f"Predicted eGFR at {time_fu} months: {str(np.round(pred_EGFR,2))} ml/min/1.73 m^2")
 
 if __name__ == "__main__":
     st.set_page_config(
