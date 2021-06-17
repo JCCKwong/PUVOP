@@ -67,28 +67,28 @@ def full_app(session_state):
             time_fu = st.number_input('Time to next follow-up, in days', 0, 1000, value=365, key=1)
             submitted = st.form_submit_button(label='Submit')
 
-    if submitted:
-        class_data = {'Baseline eGFR': egfr,
-                      'Antenatal oligohydramnios': oligohydramnios,
-                      'Birth weight': wt,
-                      'Gestational age': ga,
-                      'Antenatal/Postnatal renal dysplasia': renal_dysplasia,
-                      'Max VUR grade': vur,
-                      'Perinatal AKI': aki
-                      }
-        reg_data = {'Baseline eGFR': egfr,
-                    'Max VUR grade': vur,
-                    'time from first follow-up': time_fu
-                    }
+            if submitted:
+                class_data = {'Baseline eGFR': egfr,
+                              'Antenatal oligohydramnios': oligohydramnios,
+                              'Birth weight': wt,
+                              'Gestational age': ga,
+                              'Antenatal/Postnatal renal dysplasia': renal_dysplasia,
+                              'Max VUR grade': vur,
+                              'Perinatal AKI': aki
+                              }
+                reg_data = {'Baseline eGFR': egfr,
+                            'Max VUR grade': vur,
+                            'time from first follow-up': time_fu
+                            }
 
-        class_features = pd.DataFrame(class_data, index=[0])
-        reg_features = pd.DataFrame(reg_data, index=[0])
+                class_features = pd.DataFrame(class_data, index=[0])
+                reg_features = pd.DataFrame(reg_data, index=[0])
 
         st.write(class_features)
         st.write(reg_features)
 
 if __name__ == "__main__":
     st.set_page_config(
-        page_title="Posterior Urethral Valves Outcomes Prediction", page_icon=":pencil2:"
+        page_title="Posterior Urethral Valves Outcome Prediction", page_icon=":pencil2:"
     )
     main()
