@@ -84,8 +84,8 @@ def full_app(session_state):
                 class_features = pd.DataFrame(class_data, index=[0])
                 reg_features = pd.DataFrame(reg_data, index=[0])
 
-        st.write(class_features)
-        st.write(reg_features)
+    st.write(class_features)
+    st.write(reg_features)
 
 if __name__ == "__main__":
     st.set_page_config(
