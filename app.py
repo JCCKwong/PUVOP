@@ -120,8 +120,8 @@ def full_app(session_state):
         st.write(class_features)
         st.write(reg_features)
 
-        prob_RRT = RRT_model.predict(class_features)[:,1]
-        prob_CKD = CKD_model.predict(class_features)[:,1]
+        prob_RRT = RRT_model.predict_proba(class_features)[:,1]
+        prob_CKD = CKD_model.predict_proba(class_features)[:,1]
         pred_EGFR = EGFR_model.predict(reg_features)
 
         st.write("Probability of any CKD progression: ", prob_CKD)
