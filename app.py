@@ -86,3 +86,9 @@ def full_app(session_state):
 
         st.write(class_features)
         st.write(reg_features)
+
+if __name__ == "__main__":
+    st.set_page_config(
+        page_title="Posterior Urethral Valves Outcomes Prediction", page_icon=":pencil2:"
+    )
+    main()
