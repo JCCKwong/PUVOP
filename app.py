@@ -11,45 +11,21 @@ def main():
     st.sidebar.subheader("Navigation")
     session_state = SessionState.get(button_id="", color_to_label={})
     PAGES = {
+        "Application": full_app,
         "About": about,
         "Model development and explanation": dev,
-        "Application": full_app
+        
     }
     page = st.sidebar.selectbox("Select Page", options=list(PAGES.keys()))
     PAGES[page](session_state)
 
-
-def about(session_state):
-    st.markdown(
-        """
-    Welcome to Posterior Urethral Valves Outcomes Prediction (PUVOP) tool. PUVOP was developed to predict three specific
-    outcomes:
-    * Any decline in renal function, based on CKD stage progression
-    * Need for renal replacement therapy (dialysis or transplant)
-    * eGFR in 1 year's time
-
-    Model developement and explanation page: You will find additional details regarding how the model was developed.
-    
-    Application: You can access our simple-to-use tool.
-
-    """
-    )
-
-
-def dev(session_state):
-    st.markdown(
-        """
-    Under development
-
-    """
-    )
 
 def full_app(session_state):
     st.sidebar.header("Enter patient values")
     st.markdown(
         """
     Instructions:
-    
+
     1. Enter patient values on the left
     1. Press submit button
     1. The models will generate predictions for the three outcomes
@@ -94,8 +70,10 @@ def full_app(session_state):
             oligohydramnios = st.radio('Antenatal oligohydramnios', options=list({0: 'No', 1: 'Yes'}.keys()), index=0)
             wt = st.number_input('Birth weight, in kg', 0.00, 50.00, value=2.80, key=1)
             ga = st.number_input('Gestational age, in weeks', 0, 50, value=37, key=1)
-            renal_dysplasia = st.radio('Antenatal/Postnatal renal dysplasia', options=list({0: 'No', 1: 'Yes'}.keys()), index=0)
-            vur = st.selectbox('Max VUR grade', options=list({0: 'None', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5'}.keys()), index=3)
+            renal_dysplasia = st.radio('Antenatal/Postnatal renal dysplasia', options=list({0: 'No', 1: 'Yes'}.keys()),
+                                       index=0)
+            vur = st.selectbox('Max VUR grade',
+                               options=list({0: 'None', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5'}.keys()), index=3)
             aki = st.radio('Perinatal AKI', options=list({0: 'No', 1: 'Yes'}.keys()), index=0)
             time_fu = st.number_input('Time to next follow-up, in months', 0, 36, value=12, key=1)
             submitted = st.form_submit_button(label='Submit')
@@ -111,7 +89,7 @@ def full_app(session_state):
                               }
                 reg_data = {'Baseline eGFR': egfr,
                             'Max VUR grade': vur,
-                            'time from first follow-up': time_fu*30.4
+                            'time from first follow-up': time_fu * 30.4
                             }
 
                 class_features = pd.DataFrame(class_data, index=[0])
@@ -119,13 +97,39 @@ def full_app(session_state):
     if submitted:
         st.write("""""")
 
-        prob_RRT = RRT_model.predict_proba(class_features)[:,1]
-        prob_CKD = CKD_model.predict_proba(class_features)[:,1]
+        prob_RRT = RRT_model.predict_proba(class_features)[:, 1]
+        prob_CKD = CKD_model.predict_proba(class_features)[:, 1]
         pred_EGFR = EGFR_model.predict(reg_features)
 
-        st.write("Probability of any CKD progression: ", str(np.round(prob_CKD,3))[1:-1])
-        st.write("Probability of need for renal replacement therapy (dialysis or transplant): ", str(np.round(prob_RRT,3))[1:-1])
-        st.write(f"Predicted eGFR at {time_fu} months: {str(np.round(pred_EGFR,3))[1:-1]} ml/min/1.73 m^2")
+        st.write("Probability of any CKD progression: ", str(np.round(prob_CKD, 3))[1:-1])
+        st.write("Probability of need for renal replacement therapy (dialysis or transplant): ",
+                 str(np.round(prob_RRT, 3))[1:-1])
+        st.write(f"Predicted eGFR at {time_fu} months: {str(np.round(pred_EGFR, 3))[1:-1]} ml/min/1.73 m^2")
+
+def about(session_state):
+    st.markdown(
+        """
+    Welcome to Posterior Urethral Valves Outcomes Prediction (PUVOP) tool. PUVOP was developed to predict three specific
+    outcomes:
+    * Any decline in renal function, based on CKD stage progression
+    * Need for renal replacement therapy (dialysis or transplant)
+    * eGFR in 1 year's time
+
+    Model developement and explanation page: You will find additional details regarding how the model was developed.
+    
+    Application: You can access our simple-to-use tool.
+
+    """
+    )
+
+
+def dev(session_state):
+    st.markdown(
+        """
+    Under development
+
+    """
+    )
 
 if __name__ == "__main__":
     st.set_page_config(
