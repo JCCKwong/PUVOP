@@ -117,8 +117,7 @@ def full_app(session_state):
                 class_features = pd.DataFrame(class_data, index=[0])
                 reg_features = pd.DataFrame(reg_data, index=[0])
     if submitted:
-        st.write(class_features)
-        st.write(reg_features)
+        st.write("""""")
 
         prob_RRT = RRT_model.predict_proba(class_features)[:,1]
         prob_CKD = CKD_model.predict_proba(class_features)[:,1]
