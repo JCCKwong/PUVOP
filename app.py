@@ -59,8 +59,8 @@ def full_app(session_state):
             oligohydramnios = st.radio('Antenatal oligohydramnios', options=list({0: 'No', 1: 'Yes'}.keys()), index=0)
             renal_dysplasia = st.radio('Antenatal/Postnatal renal dysplasia', options=list({0: 'No', 1: 'Yes'}.keys()),
                                        index=0)
-            vur = st.selectbox('Max VUR grade',
-                               options=list({0: 'None', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5'}.keys()), index=3)
+            vur = st.radio('High grade VUR on VCUG (Grade 4-5)', options=list({0: 'No', 1: 'Yes'}.keys()),
+                            index=0)
             submitted = st.form_submit_button(label='Submit')
 
             if submitted:
