@@ -93,7 +93,7 @@ def full_app(session_state):
         x_labels = ('Baseline', '3', '6', '12', '18', '24', '36')
         plt.xticks(x_positions, x_labels, rotation=0)
 
-        col_left, col_right = st.beta_columns([1, 1])
+        col_left, col_right = st.beta_columns([2, 1])
         col_left.pyplot(fig)
 
         col_right.write("Probability of CKD progression at 6 months: ", str(np.round(survival_6mo, 3))[1:-1])
