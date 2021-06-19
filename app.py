@@ -35,7 +35,8 @@ def full_app(session_state):
 
     # Load saved items
     from pysurvival.utils import load_model
-    CKD_model = load_model('PUV CKD survival.zip')
+    a = joblib.load('PUV CKD survival.zip')
+    CKD_model = load_model(a)
     
     with st.sidebar:
         with st.form(key='my_form'):
