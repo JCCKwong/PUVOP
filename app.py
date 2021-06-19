@@ -5,7 +5,7 @@ import matplotlib as plt
 from pathlib import Path
 from google_drive_downloader import GoogleDriveDownloader as gdd
 import SessionState
-from pysurvival.utils import load_model
+
 
 def main():
     st.title("Posterior Urethral Valves Outcomes Prediction")
@@ -34,6 +34,7 @@ def full_app(session_state):
     )
 
     # Load saved items
+    from pysurvival.utils import load_model
     CKD_model = load_model('PUV CKD survival.zip')
     
     with st.sidebar:
