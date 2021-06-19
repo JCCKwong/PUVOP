@@ -3,4 +3,4 @@ pandas==1.0.5
 numpy==1.20.1
 matplotlib==3.3.4
 googledrivedownloader==0.4
-pysurvival>=0.1
+pysurvival>=0.2
