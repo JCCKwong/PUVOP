@@ -40,7 +40,7 @@ def full_app(session_state):
     def load_items():
         save_dest = Path('model')
         save_dest.mkdir(exist_ok=True)
-        CKD_checkpoint = Path('model/PUV CKD.zip')
+        CKD_checkpoint = Path('model/CKD.zip')
 
         # download from Google Drive if model or features are not present
         if not CKD_checkpoint.exists():
