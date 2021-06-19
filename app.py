@@ -80,11 +80,11 @@ def full_app(session_state):
         survival_12mo = CKD_model.predict_survival(data_features, t=365)
 
         # Displaying the functions
-        figure = plt.plot(CKD_model.times, survival, color='blue', label='predicted', lw=2, ls='-')
+        plt.plot(CKD_model.times, survival, color='blue', lw=2, ls='-')
         plt.ylim(0, 1.05)
         plt.xlim(0, 1000)
 
-        st.pyplot(figure)
+        st.pyplot(bbox_inches='tight', dpi=600, pad_inches=0, use_column_width='auto')
 
         st.write("Probability of CKD progression at 6 months: ", str(np.round(survival_6mo, 3))[1:-1])
         st.write("Probability of CKD progression at 6 months: ", str(np.round(survival_12mo, 3))[1:-1])
