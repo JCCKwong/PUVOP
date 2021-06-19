@@ -87,7 +87,7 @@ def full_app(session_state):
         plt.ylim(0, 1.05)
         y_positions = (0, 0.2, 0.4, 0.6, 0.8, 1)
         y_labels = ('0', '20', '40', '60', '80', '100')
-        plt.xticks(y_positions, y_labels, rotation=0)
+        plt.yticks(y_positions, y_labels, rotation=0)
         plt.xlim(0, 1100)
         x_positions = (0, 91.25, 182.5, 365, 547.5, 730, 1095)
         x_labels = ('Baseline', '3', '6', '12', '18', '24', '36')
