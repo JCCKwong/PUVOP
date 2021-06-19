@@ -33,26 +33,9 @@ def full_app(session_state):
     """
     )
 
-    # Load saved items from Google Drive
-    CKD_location = st.secrets['CKD']
-
-    @st.cache(allow_output_mutation=True)
-    def load_items():
-        save_dest = Path('model')
-        save_dest.mkdir(exist_ok=True)
-        CKD_checkpoint = Path('model/CKD.zip')
-
-        # download from Google Drive if model or features are not present
-        if not CKD_checkpoint.exists():
-            with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
-                gdd.download_file_from_google_drive(CKD_location, CKD_checkpoint)
-
-        CKD_model = load_model(CKD_checkpoint)
-
-        return CKD_model
-
-    CKD_model = load_items()
-
+    # Load saved items
+    CKD_model = load_model('PUV CKD survival.zip')
+    
     with st.sidebar:
         with st.form(key='my_form'):
             egfr = st.number_input('Baseline eGFR', 0, 1000, value=60, key=1)
