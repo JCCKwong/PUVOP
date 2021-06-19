@@ -93,9 +93,10 @@ def full_app(session_state):
         x_labels = ('0', '3', '6', '12', '18', '24', '36')
         plt.xticks(x_positions, x_labels, rotation=0)
 
-        st.pyplot(fig)
         st.write("Probability of CKD progression at 6 months: ", str(np.round(survival_6mo, 3))[1:-1])
         st.write("Probability of CKD progression at 12 months: ", str(np.round(survival_12mo, 3))[1:-1])
+        st.pyplot(fig)
+        
 
 def about(session_state):
     st.markdown(
