@@ -25,7 +25,7 @@ def full_app(session_state):
     st.sidebar.header("Enter patient values")
     st.markdown(
         """
-    Instructions:
+    **Instructions**:
 
     1. Enter patient values on the left
     1. Press submit button
@@ -100,8 +100,8 @@ def full_app(session_state):
         x_labels = ('0', '3', '6', '12', '18', '24', '36')
         plt.xticks(x_positions, x_labels, rotation=0)
 
-        st.write("Probability of CKD progression at 6 months: ", str(np.round(survival_6mo*100, 1))[1:-1])
-        st.write("Probability of CKD progression at 12 months: ", str(np.round(survival_12mo*100, 1))[1:-1])
+        st.write("**Probability of CKD progression at 6 months:** ", str(np.round(survival_6mo*100, 1))[1:-1])
+        st.write("**Probability of CKD progression at 12 months:** ", str(np.round(survival_12mo*100, 1))[1:-1])
         st.pyplot(fig)
 
 
