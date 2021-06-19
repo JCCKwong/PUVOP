@@ -40,7 +40,7 @@ def full_app(session_state):
     def load_items():
         save_dest = Path('model')
         save_dest.mkdir(exist_ok=True)
-        CKD_checkpoint = Path('model/PUV CKD.pkl')
+        CKD_checkpoint = Path('model/PUV CKD.zip')
 
         # download from Google Drive if model or features are not present
         if not CKD_checkpoint.exists():
@@ -85,7 +85,7 @@ def full_app(session_state):
                           xlim=(0,1000))
 
         st.write(figure)
-        
+
         st.write("Probability of CKD progression at 6 months: ", str(np.round(survival_6mo, 3))[1:-1])
         st.write("Probability of CKD progression at 6 months: ", str(np.round(survival_12mo, 3))[1:-1])
 
