@@ -81,9 +81,6 @@ def full_app(session_state):
 
         # Displaying the functions
         figure = plt.plot(CKD_model.times, survival, color='blue', label='predicted', lw=2, ls='-')
-        title = "Predicted survival function of individual case"
-        plt.legend(fontsize=12)
-        plt.title(title, fontsize=15)
         plt.ylim(0, 1.05)
         plt.xlim(0, 1000)
         plt.show()
