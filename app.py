@@ -80,9 +80,13 @@ def full_app(session_state):
         survival_12mo = CKD_model.predict_survival(data_features, t=365)
 
         # Displaying the functions
-        figure = plt.plot(CKD_model.times, survival, color='blue', label='predicted', lw=2, ls='-',
-                          title="Predicted CKD progression-free survival curve", ylim=(0, 1.05),
-                          xlim=(0,1000))
+        figure = plt.plot(CKD_model.times, survival, color='blue', label='predicted', lw=2, ls='-')
+        title = "Predicted survival function of individual case"
+        plt.legend(fontsize=12)
+        plt.title(title, fontsize=15)
+        plt.ylim(0, 1.05)
+        plt.xlim(0, 1000)
+        plt.show()
 
         st.write(figure)
 
