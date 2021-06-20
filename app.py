@@ -153,7 +153,7 @@ def full_app(session_state):
         plt.axvline(x=1095, color='black', ls='--', alpha=0.2)
         plt.axvline(x=1825, color='black', ls='--', alpha=0.2)
         plt.axvline(x=3650, color='black', ls='--', alpha=0.2)
-        
+
         RRTprob_1yr = str(np.round(RRT_survival_1yr * 100, 1))[1:-1]
         RRTprob_3yr = str(np.round(RRT_survival_3yr * 100, 1))[1:-1]
         col2.write(f"**Probability of initiating RRT at 1 year:** {RRTprob_1yr}")
@@ -188,7 +188,9 @@ def dev(session_state):
 
 
 if __name__ == "__main__":
-    st.set_page_config(
-        page_title="Posterior Urethral Valves Outcome Prediction", page_icon=":pencil2:"
-    )
+    st.set_page_config(page_title="PUVOP - Posterior Urethral Valves Outcome Prediction",
+                       page_icon=":pencil2:",
+                       layout="wide",
+                       initial_sidebar_state="expanded"
+                       )
     main()
