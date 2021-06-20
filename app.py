@@ -89,8 +89,12 @@ def full_app(session_state):
         # Displaying the functions
         fig, ax = plt.subplots()
         plt.plot(CKD_model.times, survival, color='blue', lw=2, ls='-')
+        
+        # Axis labels
         plt.xlabel('Time from baseline assessment (months)')
         plt.ylabel('CKD progression-free survival (%)')
+        
+        # Tick labels
         plt.ylim(0, 1.05)
         y_positions = (0, 0.2, 0.4, 0.6, 0.8, 1)
         y_labels = ('0', '20', '40', '60', '80', '100')
@@ -99,6 +103,14 @@ def full_app(session_state):
         x_positions = (0, 91.25, 182.5, 365, 547.5, 730, 1095)
         x_labels = ('0', '3', '6', '12', '18', '24', '36')
         plt.xticks(x_positions, x_labels, rotation=0)
+        
+        # Tick vertical lines
+        plt.axvline(x=91.25, color='black', ls='--', alpha=0.2)
+        plt.axvline(x=182.5, color='black', ls='--', alpha=0.2)
+        plt.axvline(x=365, color='black', ls='--', alpha=0.2)
+        plt.axvline(x=547.5, color='black', ls='--', alpha=0.2)
+        plt.axvline(x=730, color='black', ls='--', alpha=0.2)
+        plt.axvline(x=1095, color='black', ls='--', alpha=0.2)
 
         st.write("**Probability of CKD progression at 6 months:** ", str(np.round(survival_6mo*100, 1))[1:-1])
         st.write("**Probability of CKD progression at 12 months:** ", str(np.round(survival_12mo*100, 1))[1:-1])
