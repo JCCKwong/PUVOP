@@ -35,23 +35,29 @@ def full_app(session_state):
 
     # Load saved items from Google Drive
     CKD_location = st.secrets['CKD']
+    RRT_location = st.secrets['RRT']
 
     @st.cache(allow_output_mutation=True)
     def load_items():
         save_dest = Path('model')
         save_dest.mkdir(exist_ok=True)
         CKD_checkpoint = Path('model/CKD.zip')
+        RRT_checkpoint = Path('model/RRT.zip')
 
         # download from Google Drive if model or features are not present
         if not CKD_checkpoint.exists():
             with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
                 gdd.download_file_from_google_drive(CKD_location, CKD_checkpoint)
+        if not RRT_checkpoint.exists():
+            with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
+                gdd.download_file_from_google_drive(RRT_location, RRT_checkpoint)
 
         CKD_model = load_model(CKD_checkpoint)
+        RRT_model = load_model(RRT_checkpoint)
 
-        return CKD_model
+        return CKD_model, RRT_model
 
-    CKD_model = load_items()
+    CKD_model, RRT_model = load_items()
 
     # Define choices and labels for feature inputs
     CHOICES = {0: 'No', 1: 'Yes'}
@@ -82,6 +88,7 @@ def full_app(session_state):
     if submitted:
         st.write("""""")
 
+        # CKD progression-free survival
         survival = CKD_model.predict_survival(data_features).flatten()
         survival_6mo = CKD_model.predict_survival(data_features, t=182.5)
         survival_12mo = CKD_model.predict_survival(data_features, t=365)
@@ -115,6 +122,39 @@ def full_app(session_state):
         st.write("**Probability of CKD progression at 6 months:** ", str(np.round(survival_6mo*100, 1))[1:-1])
         st.write("**Probability of CKD progression at 12 months:** ", str(np.round(survival_12mo*100, 1))[1:-1])
         st.pyplot(fig)
+
+        # RRT progression-free survival
+        RRT_survival = RRT_model.predict_survival(data_features).flatten()
+        RRT_survival_1yr = RRT_model.predict_survival(data_features, t=365)
+        RRT_survival_3yr = RRT_model.predict_survival(data_features, t=1095)
+
+        # Displaying the functions
+        fig2, ax2 = plt.subplots()
+        plt.plot(RRT_model.times, RRT_survival, color='red', lw=2, ls='-')
+
+        # Axis labels
+        plt.xlabel('Time from baseline assessment (years)')
+        plt.ylabel('RRT-free survival (%)')
+
+        # Tick labels
+        plt.ylim(0, 1.05)
+        y_positions = (0, 0.2, 0.4, 0.6, 0.8, 1)
+        y_labels = ('0', '20', '40', '60', '80', '100')
+        plt.yticks(y_positions, y_labels, rotation=0)
+        plt.xlim(0, 4000)
+        x_positions = (0, 365, 1095, 1825, 3650)
+        x_labels = ('0', '1', '3', '5', '10')
+        plt.xticks(x_positions, x_labels, rotation=0)
+
+        # Tick vertical lines
+        plt.axvline(x=365, color='black', ls='--', alpha=0.2)
+        plt.axvline(x=1095, color='black', ls='--', alpha=0.2)
+        plt.axvline(x=1825, color='black', ls='--', alpha=0.2)
+        plt.axvline(x=3650, color='black', ls='--', alpha=0.2)
+
+        st.write("**Probability of initiating RRT at 1 year:** ", str(np.round(RRT_survival_1yr * 100, 1))[1:-1])
+        st.write("**Probability of initiating RRT at 3 years:** ", str(np.round(RRT_survival_3yr * 100, 1))[1:-1])
+        st.pyplot(fig2)
 
 
 def about(session_state):
