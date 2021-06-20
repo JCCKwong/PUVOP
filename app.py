@@ -35,14 +35,14 @@ def full_app(session_state):
 
     col1, col2 = st.beta_columns([1, 1])
     col1.header("CKD progression-free survival")
-    col1.write("This will predict the probability of your kidney function worsening, based on progression"
+    col1.write("This will predict the probability of your kidney function worsening, based on progression "
                "in stage of chronic kidney disease (CKD).")
     col1.write("""""")
     col2.header("RRT progression-free survival")
     col2.write("This will predict the probability of needing to start renal replacement therapy (RRT), "
                "such as dialysis or transplant.")
-    col2.write("""""")    
-    
+    col2.write("""""")
+
     # Load saved items from Google Drive
     CKD_location = st.secrets['CKD']
     RRT_location = st.secrets['RRT']
@@ -131,7 +131,7 @@ def full_app(session_state):
 
         CKDprob_6mo = str(np.round(survival_6mo*100, 1))[1:-1]
         CKDprob_12mo = str(np.round(survival_12mo*100, 1))[1:-1]
-        
+
         col1.write(f"**Probability of CKD progression at 6 months:** {CKDprob_6mo}")
         col1.write(f"**Probability of CKD progression at 12 months:** {CKDprob_12mo}")
         col1.pyplot(fig)
@@ -167,7 +167,7 @@ def full_app(session_state):
 
         RRTprob_1yr = str(np.round(RRT_survival_1yr * 100, 1))[1:-1]
         RRTprob_3yr = str(np.round(RRT_survival_3yr * 100, 1))[1:-1]
-        
+
         col2.write(f"**Probability of initiating RRT at 1 year:** {RRTprob_1yr}")
         col2.write(f"**Probability of initiating RRT at 3 years:** {RRTprob_3yr}")
         col2.pyplot(fig2)
