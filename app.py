@@ -67,7 +67,7 @@ def full_app(session_state):
 
     with st.sidebar:
         with st.form(key='my_form'):
-            egfr = st.number_input('Baseline eGFR', 0, 1000, value=60, key=1)
+            egfr = st.number_input('Baseline eGFR', 0.00, 1000.00, value=60.00, key=1)
             oligohydramnios = st.selectbox('Antenatal oligohydramnios', options=list(CHOICES.keys()),
                                            format_func=format_func_yn, index=0)
             renal_dysplasia = st.selectbox('Antenatal/Postnatal renal dysplasia', options=list(CHOICES.keys()),
