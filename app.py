@@ -189,7 +189,7 @@ def dev(session_state):
 
 if __name__ == "__main__":
     st.set_page_config(page_title="PUVOP - Posterior Urethral Valves Outcome Prediction",
-                       page_icon=":pencil2:",
+                       page_icon=":toilet:",
                        layout="wide",
                        initial_sidebar_state="expanded"
                        )
