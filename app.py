@@ -121,7 +121,7 @@ def full_app(session_state):
 
         CKDprob_6mo = str(np.round(survival_6mo*100, 1))[1:-1]
         CKDprob_12mo = str(np.round(survival_12mo*100, 1))[1:-1]
-        col1.write("**Probability of CKD progression at 6 months:** ", CKDprob_6mo)
+        col1.write("**Probability of CKD progression at 6 months:** ")
         col1.write("**Probability of CKD progression at 12 months:** ", CKDprob_12mo)
         col1.pyplot(fig)
 
