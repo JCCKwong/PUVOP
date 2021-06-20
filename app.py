@@ -121,8 +121,8 @@ def full_app(session_state):
 
         CKDprob_6mo = str(np.round(survival_6mo*100, 1))[1:-1]
         CKDprob_12mo = str(np.round(survival_12mo*100, 1))[1:-1]
-        col1.markdown("**Probability of CKD progression at 6 months:** ",np.round(survival_6mo*100, 1))
-        col1.markdown("**Probability of CKD progression at 12 months:** ", np.round(survival_12mo*100, 1))
+        col1.markdown("**Probability of CKD progression at 6 months:** ", round(survival_6mo*100, 1))
+        col1.markdown("**Probability of CKD progression at 12 months:** ", round(survival_12mo*100, 1))
         col1.pyplot(fig)
 
         # RRT progression-free survival
