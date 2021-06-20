@@ -12,9 +12,9 @@ def main():
     st.sidebar.subheader("Navigation")
     session_state = SessionState.get(button_id="", color_to_label={})
     PAGES = {
-        "Application": full_app,
+        "PUVOP Tool": full_app,
         "About": about,
-        "Model development and explanation": dev,
+        "Model development": dev,
 
     }
     page = st.sidebar.selectbox("Select Page", options=list(PAGES.keys()))
@@ -176,15 +176,14 @@ def full_app(session_state):
 def about(session_state):
     st.markdown(
         """
-    Welcome to Posterior Urethral Valves Outcomes Prediction (PUVOP) tool. PUVOP was developed to predict three specific
+    Welcome to Posterior Urethral Valves Outcomes Prediction (PUVOP) tool. PUVOP was developed to predict two specific
     outcomes:
     * Any decline in renal function, based on CKD stage progression
     * Need for renal replacement therapy (dialysis or transplant)
-    * eGFR in 1 year's time
 
-    Model developement and explanation page: You will find additional details regarding how the model was developed.
+    Model development: You will find additional details regarding how the model was developed.
 
-    Application: You can access our simple-to-use tool.
+    PUVOP Tool: You can access our simple-to-use application.
 
     """
     )
