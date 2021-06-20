@@ -122,7 +122,7 @@ def full_app(session_state):
         CKDprob_6mo = str(np.round(survival_6mo*100, 1))[1:-1]
         CKDprob_12mo = str(np.round(survival_12mo*100, 1))[1:-1]
         col1.write(f"**Probability of CKD progression at 6 months:** {CKDprob_6mo}")
-        col1.write("**Probability of CKD progression at 12 months:** ", CKDprob_12mo)
+        col1.write(f"**Probability of CKD progression at 12 months:** {CKDprob_12mo}")
         col1.pyplot(fig)
 
         # RRT progression-free survival
@@ -153,9 +153,11 @@ def full_app(session_state):
         plt.axvline(x=1095, color='black', ls='--', alpha=0.2)
         plt.axvline(x=1825, color='black', ls='--', alpha=0.2)
         plt.axvline(x=3650, color='black', ls='--', alpha=0.2)
-
-        col2.write("**Probability of initiating RRT at 1 year:** ", str(np.round(RRT_survival_1yr * 100, 1))[1:-1])
-        col2.write("**Probability of initiating RRT at 3 years:** ", str(np.round(RRT_survival_3yr * 100, 1))[1:-1])
+        
+        RRTprob_1yr = str(np.round(RRT_survival_1yr * 100, 1))[1:-1]
+        RRTprob_3yr = str(np.round(RRT_survival_3yr * 100, 1))[1:-1]
+        col2.write(f"**Probability of initiating RRT at 1 year:** {RRTprob_1yr}")
+        col2.write(f"**Probability of initiating RRT at 3 years:** {RRTprob_3yr}")
         col2.pyplot(fig2)
 
 
