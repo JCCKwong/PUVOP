@@ -87,7 +87,7 @@ def full_app(session_state):
 
     if submitted:
         st.write("""""")
-
+        col1, col2 = st.beta_columns([1, 1])
         # CKD progression-free survival
         survival = CKD_model.predict_survival(data_features).flatten()
         survival_6mo = CKD_model.predict_survival(data_features, t=182.5)
@@ -119,9 +119,9 @@ def full_app(session_state):
         plt.axvline(x=730, color='black', ls='--', alpha=0.2)
         plt.axvline(x=1095, color='black', ls='--', alpha=0.2)
 
-        st.write("**Probability of CKD progression at 6 months:** ", str(np.round(survival_6mo*100, 1))[1:-1])
-        st.write("**Probability of CKD progression at 12 months:** ", str(np.round(survival_12mo*100, 1))[1:-1])
-        st.pyplot(fig)
+        col1.write("**Probability of CKD progression at 6 months:** ", str(np.round(survival_6mo*100, 1))[1:-1])
+        col1.write("**Probability of CKD progression at 12 months:** ", str(np.round(survival_12mo*100, 1))[1:-1])
+        col1.pyplot(fig)
 
         # RRT progression-free survival
         RRT_survival = RRT_model.predict_survival(data_features).flatten()
@@ -152,9 +152,9 @@ def full_app(session_state):
         plt.axvline(x=1825, color='black', ls='--', alpha=0.2)
         plt.axvline(x=3650, color='black', ls='--', alpha=0.2)
 
-        st.write("**Probability of initiating RRT at 1 year:** ", str(np.round(RRT_survival_1yr * 100, 1))[1:-1])
-        st.write("**Probability of initiating RRT at 3 years:** ", str(np.round(RRT_survival_3yr * 100, 1))[1:-1])
-        st.pyplot(fig2)
+        col2.write("**Probability of initiating RRT at 1 year:** ", str(np.round(RRT_survival_1yr * 100, 1))[1:-1])
+        col2.write("**Probability of initiating RRT at 3 years:** ", str(np.round(RRT_survival_3yr * 100, 1))[1:-1])
+        col2.pyplot(fig2)
 
 
 def about(session_state):
