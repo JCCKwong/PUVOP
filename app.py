@@ -118,11 +118,11 @@ def full_app(session_state):
         plt.axvline(x=547.5, color='black', ls='--', alpha=0.2)
         plt.axvline(x=730, color='black', ls='--', alpha=0.2)
         plt.axvline(x=1095, color='black', ls='--', alpha=0.2)
-        
+
         CKDprob_6mo = str(np.round(survival_6mo*100, 1))[1:-1]
         CKDprob_12mo = str(np.round(survival_12mo*100, 1))[1:-1]
-        col1.write("**Probability of CKD progression at 6 months:** ", CKDprob_6mo)
-        col1.write("**Probability of CKD progression at 12 months:** ", CKDprob_12mo)
+        col1.markdown("**Probability of CKD progression at 6 months:** ", CKDprob_6mo)
+        col1.markdown("**Probability of CKD progression at 12 months:** ", CKDprob_12mo)
         col1.pyplot(fig)
 
         # RRT progression-free survival
