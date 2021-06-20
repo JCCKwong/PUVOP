@@ -38,7 +38,7 @@ def full_app(session_state):
     col1.write("This will predict the probability of your kidney function worsening, based on progression "
                "in stage of chronic kidney disease (CKD).")
     col1.write("""""")
-    col2.header("RRT progression-free survival")
+    col2.header("RRT-free survival")
     col2.write("This will predict the probability of needing to start renal replacement therapy (RRT), "
                "such as dialysis or transplant.")
     col2.write("""""")
