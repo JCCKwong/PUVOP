@@ -33,19 +33,23 @@ def full_app(session_state):
     """
     )
 
-    col1, col2 = st.beta_columns([1, 1])
+    col1, col2, col3 = st.beta_columns([1, 1, 1])
     col1.header("CKD progression-free survival")
     col1.write("This will predict the probability of your kidney function worsening, based on progression "
                "in stage of chronic kidney disease (CKD).")
     col1.write("""""")
     col2.header("RRT-free survival")
-    col2.write("This will predict the probability of needing to start renal replacement therapy (RRT), "
+    col2.write("This will predict the probability of avoiding the need to start renal replacement therapy (RRT), "
                "such as dialysis or transplant.")
     col2.write("""""")
+    col3.header("CIC-free survival")
+    col3.write("This will predict the probability of avoiding the need to start clean intermittent catheterization (CIC).")
+    col3.write("""""")
 
     # Load saved items from Google Drive
     CKD_location = st.secrets['CKD']
     RRT_location = st.secrets['RRT']
+    CIC_location = st.secrets['CIC']
 
     @st.cache(allow_output_mutation=True)
     def load_items():
@@ -53,6 +57,7 @@ def full_app(session_state):
         save_dest.mkdir(exist_ok=True)
         CKD_checkpoint = Path('model/CKD.zip')
         RRT_checkpoint = Path('model/RRT.zip')
+        CIC_checkpoint = Path('model/CIC.zip')
 
         # download from Google Drive if model or features are not present
         if not CKD_checkpoint.exists():
@@ -61,13 +66,17 @@ def full_app(session_state):
         if not RRT_checkpoint.exists():
             with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
                 gdd.download_file_from_google_drive(RRT_location, RRT_checkpoint)
+        if not CIC_checkpoint.exists():
+            with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
+                gdd.download_file_from_google_drive(CIC_location, CIC_checkpoint)
 
         CKD_model = load_model(CKD_checkpoint)
         RRT_model = load_model(RRT_checkpoint)
+        CIC_model = load_model(CIC_checkpoint)
 
-        return CKD_model, RRT_model
+        return CKD_model, RRT_model, CIC_model
 
-    CKD_model, RRT_model = load_items()
+    CKD_model, RRT_model, CIC_model = load_items()
 
     # Define choices and labels for feature inputs
     CHOICES = {0: 'No', 1: 'Yes'}
@@ -77,20 +86,20 @@ def full_app(session_state):
 
     with st.sidebar:
         with st.form(key='my_form'):
-            egfr = st.number_input('Baseline eGFR', 0.00, 1000.00, value=58.00, key=1)
-            oligohydramnios = st.selectbox('Antenatal oligohydramnios', options=list(CHOICES.keys()),
-                                           format_func=format_func_yn, index=1)
-            renal_dysplasia = st.selectbox('Antenatal/Postnatal renal dysplasia', options=list(CHOICES.keys()),
-                                           format_func=format_func_yn, index=1)
             vur = st.selectbox('High Grade VUR on initial VCUG (Grade 4-5)', options=list(CHOICES.keys()),
                                format_func=format_func_yn, index=1)
+            snc = st.number_input('Serum nadir creatinine at 1 year of life (mg/dL)', 0.00, 10.00, value=0.50, key=1)
+            renal_dysplasia = st.selectbox('Antenatal/Postnatal renal dysplasia', options=list(CHOICES.keys()),
+                                           format_func=format_func_yn, index=1)
+            egfr = st.number_input('Baseline eGFR at initial clinic visit', 0.00, 1000.00, value=58.00, key=1)
+
             submitted = st.form_submit_button(label='Submit')
 
             if submitted:
-                data = {'Baseline eGFR': egfr,
-                        'Antenatal oligohydramnios': oligohydramnios,
+                data = {'Max VUR grade': vur,
+                        'SNC1 (mg/dL)': snc,
                         'Antenatal/Postnatal renal dysplasia': renal_dysplasia,
-                        'Max VUR grade': vur
+                        'Baseline eGFR': egfr
                         }
 
                 data_features = pd.DataFrame(data, index=[0])
@@ -132,8 +141,8 @@ def full_app(session_state):
         CKDprob_6mo = str(np.round(survival_6mo*100, 1))[1:-1]
         CKDprob_12mo = str(np.round(survival_12mo*100, 1))[1:-1]
 
-        col1.write(f"**Probability of CKD progression at 6 months:** {CKDprob_6mo}")
-        col1.write(f"**Probability of CKD progression at 12 months:** {CKDprob_12mo}")
+        col1.write(f"**Probability of avoiding CKD progression at 6 months:** {CKDprob_6mo}")
+        col1.write(f"**Probability of avoiding CKD progression at 12 months:** {CKDprob_12mo}")
         col1.pyplot(fig)
 
         # RRT progression-free survival
@@ -168,9 +177,45 @@ def full_app(session_state):
         RRTprob_1yr = str(np.round(RRT_survival_1yr * 100, 1))[1:-1]
         RRTprob_3yr = str(np.round(RRT_survival_3yr * 100, 1))[1:-1]
 
-        col2.write(f"**Probability of initiating RRT at 1 year:** {RRTprob_1yr}")
-        col2.write(f"**Probability of initiating RRT at 3 years:** {RRTprob_3yr}")
+        col2.write(f"**Probability of avoiding RRT at 1 year:** {RRTprob_1yr}")
+        col2.write(f"**Probability of avoiding RRT at 3 years:** {RRTprob_3yr}")
         col2.pyplot(fig2)
+
+        # CIC progression-free survival
+        CIC_survival = CIC_model.predict_survival(data_features).flatten()
+        CIC_survival_1yr = CIC_model.predict_survival(data_features, t=365)
+        CIC_survival_3yr = CIC_model.predict_survival(data_features, t=1095)
+
+        # Displaying the functions
+        fig3, ax3 = plt.subplots()
+        plt.plot(CIC_model.times, CIC_survival, color='green', lw=2, ls='-')
+
+        # Axis labels
+        plt.xlabel('Time from baseline assessment (years)')
+        plt.ylabel('CIC-free survival (%)')
+
+        # Tick labels
+        plt.ylim(0, 1.05)
+        y_positions = (0, 0.2, 0.4, 0.6, 0.8, 1)
+        y_labels = ('0', '20', '40', '60', '80', '100')
+        plt.yticks(y_positions, y_labels, rotation=0)
+        plt.xlim(0, 4000)
+        x_positions = (0, 365, 1095, 1825, 3650)
+        x_labels = ('0', '1', '3', '5', '10')
+        plt.xticks(x_positions, x_labels, rotation=0)
+
+        # Tick vertical lines
+        plt.axvline(x=365, color='black', ls='--', alpha=0.2)
+        plt.axvline(x=1095, color='black', ls='--', alpha=0.2)
+        plt.axvline(x=1825, color='black', ls='--', alpha=0.2)
+        plt.axvline(x=3650, color='black', ls='--', alpha=0.2)
+
+        CICprob_1yr = str(np.round(CIC_survival_1yr * 100, 1))[1:-1]
+        CICprob_3yr = str(np.round(CIC_survival_3yr * 100, 1))[1:-1]
+
+        col3.write(f"**Probability of avoiding RRT at 1 year:** {CICprob_1yr}")
+        col3.write(f"**Probability of avoiding RRT at 3 years:** {CICprob_3yr}")
+        col3.pyplot(fig3)
 
 
 def about(session_state):
