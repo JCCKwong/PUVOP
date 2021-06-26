@@ -89,7 +89,7 @@ def full_app(session_state):
             vur = st.selectbox('High Grade VUR on initial VCUG (Grade 4-5)', options=list(CHOICES.keys()),
                                format_func=format_func_yn, index=1)
             units = st.radio('Units of measurement for creatinine',('mg/dL', 'umol/L'), index=0)
-            snc = st.number_input('Serum nadir creatinine at 1 year of life (mg/dL)', 0.00, 10.00, value=0.50, key=1)
+            snc = st.number_input('Serum nadir creatinine at 1 year of life', 0.00, 1000.00, value=0.50, key=1)
             renal_dysplasia = st.selectbox('Antenatal/Postnatal renal dysplasia', options=list(CHOICES.keys()),
                                            format_func=format_func_yn, index=1)
             egfr = st.number_input('Baseline eGFR at one year, or at time of presentation', 0.00, 1000.00, value=58.00,
