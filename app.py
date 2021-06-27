@@ -22,10 +22,9 @@ def main():
 
 def full_app(session_state):
     st.sidebar.header("Enter patient values")
+    st.subheader("Instructions")
     st.markdown(
         """
-    **Instructions**:
-
     1. Enter patient values on the left
         1. **High-Grade VUR on initial VCUG**: presence of Grade IV or V vesicoureteral reflux (VUR) on initial 
         voiding cystourethrogram (VCUG)
