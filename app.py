@@ -159,7 +159,9 @@ def full_app(session_state):
         col1.write(f"**Probability of avoiding CKD progression at 6 months:** {CKDprob_6mo}")
         col1.write(f"**Probability of avoiding CKD progression at 12 months:** {CKDprob_12mo}")
         if egfr < 15:
-            col1.write("You have end-stage renal disease.")
+            col1.write("""""")
+            col1.write("The patient has already progressed to end-stage renal disease based on the information "
+                       "provided")
         else:
             col1.pyplot(fig)
 
