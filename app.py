@@ -89,8 +89,10 @@ def full_app(session_state):
             vur = st.selectbox('High Grade VUR on initial VCUG (Grade 4-5)', options=list(CHOICES.keys()),
                                format_func=format_func_yn, index=1)
             units = st.radio('Units of measurement for creatinine',('mg/dL', 'umol/L'), index=0)
-            snc = st.number_input('Serum nadir creatinine at 1 year of life', 0.00, 1000.00, value=0.50, key=1)
-            renal_dysplasia = st.selectbox('Antenatal/Postnatal renal dysplasia', options=list(CHOICES.keys()),
+            snc = st.number_input('Serum nadir creatinine at first year of presentation (ie: first year of life if '
+                                  'neonatal diagnosis)', 0.00, 1000.00, value=0.50, key=1)
+            renal_dysplasia = st.selectbox('Renal dysplasia at presentation (eg: increased echogenicity, cortical cysts'
+                                           ', reduced corticomedullary differentiation)', options=list(CHOICES.keys()),
                                            format_func=format_func_yn, index=1)
             egfr = st.number_input('Baseline eGFR at one year, or at time of presentation', 0.00, 1000.00, value=58.00,
                                    key=1)
@@ -149,7 +151,10 @@ def full_app(session_state):
 
         col1.write(f"**Probability of avoiding CKD progression at 6 months:** {CKDprob_6mo}")
         col1.write(f"**Probability of avoiding CKD progression at 12 months:** {CKDprob_12mo}")
-        col1.pyplot(fig)
+        if egfr < 15:
+            col1.write("You have end-stage renal disease.")
+        else:
+            col1.pyplot(fig)
 
         # RRT progression-free survival
         RRT_survival = RRT_model.predict_survival(data_features).flatten()
