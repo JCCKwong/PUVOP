@@ -9,6 +9,7 @@ from pysurvival.utils import load_model
 
 def main():
     st.title("Posterior Urethral Valves Outcomes Prediction (PUVOP)")
+    st.sidebar.image("SickKids logo.png", use_column_width=True)
     st.sidebar.subheader("Navigation")
     session_state = SessionState.get(button_id="", color_to_label={})
     PAGES = {
