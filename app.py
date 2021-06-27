@@ -242,19 +242,29 @@ def full_app(session_state):
 def about(session_state):
     st.markdown(
         """
-    Welcome to Posterior Urethral Valves Outcomes Prediction (PUVOP) tool. PUVOP was developed to predict two specific
+    Welcome to Posterior Urethral Valves Outcomes Prediction (PUVOP) tool. PUVOP was developed to predict three specific
     outcomes:
     * Any decline in renal function, based on CKD stage progression
     * Need for renal replacement therapy (dialysis or transplant)
+    * Need for clean intermittent catheterization
 
-    Model development: You will find additional details regarding how the model was developed.
+    **Model development**: You will find additional details regarding how the model was developed.
 
-    PUVOP Tool: You can access our simple-to-use application.
-
+    **PUVOP Tool**: You can access our simple-to-use application.
+    
     """
     )
-
-
+    st.subheader("Reference")
+    st.markdown(
+        """
+    **Posterior Urethral Valves Outcomes Prediction (PUVOP): a machine learning tool to predict clinically relevant 
+    outcomes in boys with posterior urethral valves**
+    
+    *Jethro CC. Kwong, Adree Khondker, Jin Kyu Kim, Michael Chua, Daniel T. Keefe, Joana Dos Santos, Marta Skreta, 
+    Lauren Erdman, John Weaver, Gregory Tasian, Chia Wei Teoh, Mandy Rickard, Armando J. Lorenzo*
+    
+    """
+    )
 def dev(session_state):
     st.markdown(
         """
