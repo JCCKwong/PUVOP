@@ -28,6 +28,14 @@ def full_app(session_state):
     **Instructions**:
 
     1. Enter patient values on the left
+        1. **High-Grade VUR on initial VCUG**: presence of Grade IV or V vesicoureteral reflux (VUR) on initial 
+        voiding cystourethrogram (VCUG)
+        2. **Serum nadir creatinine at first year of presentation**: for patients with neonatal diagnosis of PUV, this 
+        would refer to serum nadir creatinine within the first year of life. Please ensure creatinine is inputted in 
+        the correct units
+        3. **Renal dysplasia at presentation**: this includes increased echogenicity, cortical cysts, or reduced 
+        corticomedullary differentiation on renal ultrasound
+        4. **Baseline eGFR at one year, or at time of presentation** 
     1. Press submit button
     1. The models will generate predictions
     """
@@ -86,13 +94,12 @@ def full_app(session_state):
 
     with st.sidebar:
         with st.form(key='my_form'):
-            vur = st.selectbox('High Grade VUR on initial VCUG (Grade 4-5)', options=list(CHOICES.keys()),
+            vur = st.selectbox('High Grade VUR on initial VCUG', options=list(CHOICES.keys()),
                                format_func=format_func_yn, index=1)
             units = st.radio('Units of measurement for creatinine',('mg/dL', 'umol/L'), index=0)
-            snc = st.number_input('Serum nadir creatinine at first year of presentation (ie: first year of life if '
-                                  'neonatal diagnosis)', 0.00, 1000.00, value=0.50, key=1)
-            renal_dysplasia = st.selectbox('Renal dysplasia at presentation (eg: increased echogenicity, cortical cysts'
-                                           ', reduced corticomedullary differentiation)', options=list(CHOICES.keys()),
+            snc = st.number_input('Serum nadir creatinine at first year of presentation', 0.00, 1000.00, value=0.50,
+                                  key=1)
+            renal_dysplasia = st.selectbox('Renal dysplasia at presentation', options=list(CHOICES.keys()),
                                            format_func=format_func_yn, index=1)
             egfr = st.number_input('Baseline eGFR at one year, or at time of presentation', 0.00, 1000.00, value=58.00,
                                    key=1)
