@@ -28,14 +28,14 @@ def full_app(session_state):
     **Instructions**:
 
     1. Enter patient values on the left
-        1. **High-Grade VUR on initial VCUG**: presence of Grade IV or V vesicoureteral reflux (VUR) on initial 
+        a. **High-Grade VUR on initial VCUG**: presence of Grade IV or V vesicoureteral reflux (VUR) on initial 
         voiding cystourethrogram (VCUG)
-        2. **Serum nadir creatinine at first year of presentation**: for patients with neonatal diagnosis of PUV, this 
+        b. **Serum nadir creatinine at first year of presentation**: for patients with neonatal diagnosis of PUV, this 
         would refer to serum nadir creatinine within the first year of life. Please ensure creatinine is inputted in 
         the correct units
-        3. **Renal dysplasia at presentation**: this includes increased echogenicity, cortical cysts, or reduced 
+        c. **Renal dysplasia at presentation**: this includes increased echogenicity, cortical cysts, or reduced 
         corticomedullary differentiation on renal ultrasound
-        4. **Baseline eGFR at one year, or at time of presentation** 
+        d. **Baseline eGFR at one year, or at time of presentation** 
     1. Press submit button
     1. The models will generate predictions
     """
