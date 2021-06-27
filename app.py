@@ -250,13 +250,17 @@ def about(session_state):
 
     **PUVOP Tool**: You can access our simple-to-use application.
     
+    The CKD-progression, renal replacement therapy, and clean intermittent catheterization-free surivival models 
+    achieved a c-index of 0.765, 0.952, and 0.700, respectively, and outperformed Cox proportional hazards regression. 
+    Additional information can be found in the reference below or by contacting the authors.
+    
     """
     )
     st.subheader("Reference")
     st.markdown(
         """
     **Posterior Urethral Valves Outcomes Prediction (PUVOP): a machine learning tool to predict clinically relevant 
-    outcomes in boys with posterior urethral valves**
+    outcomes in boys with posterior urethral valves**\
     *Jethro CC. Kwong, Adree Khondker, Jin Kyu Kim, Michael Chua, Daniel T. Keefe, Joana Dos Santos, Marta Skreta, 
     Lauren Erdman, John Weaver, Gregory Tasian, Chia Wei Teoh, Mandy Rickard, Armando J. Lorenzo*
     
