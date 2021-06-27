@@ -122,16 +122,16 @@ def full_app(session_state):
         st.write("""""")
 
         # CKD progression-free survival
-        survival = CKD_model.predict_survival(data_features).flatten()
-        survival_6mo = CKD_model.predict_survival(data_features, t=182.5)
-        survival_12mo = CKD_model.predict_survival(data_features, t=365)
+        CKD_survival = CKD_model.predict_survival(data_features).flatten()
+        CKD_survival_1yr = CKD_model.predict_survival(data_features, t=365)
+        CKD_survival_3yr = CKD_model.predict_survival(data_features, t=1095)
 
         # Displaying the functions
         fig, ax = plt.subplots()
-        plt.plot(CKD_model.times, survival, color='blue', lw=2, ls='-')
+        plt.plot(CKD_model.times, CKD_survival, color='blue', lw=2, ls='-')
 
         # Axis labels
-        plt.xlabel('Time from baseline assessment (months)')
+        plt.xlabel('Time from baseline assessment (years)')
         plt.ylabel('CKD progression-free survival (%)')
 
         # Tick labels
@@ -139,24 +139,22 @@ def full_app(session_state):
         y_positions = (0, 0.2, 0.4, 0.6, 0.8, 1)
         y_labels = ('0', '20', '40', '60', '80', '100')
         plt.yticks(y_positions, y_labels, rotation=0)
-        plt.xlim(0, 1200)
-        x_positions = (0, 91.25, 182.5, 365, 547.5, 730, 1095)
-        x_labels = ('0', '3', '6', '12', '18', '24', '36')
+        plt.xlim(0, 4000)
+        x_positions = (0, 365, 1095, 1825, 3650)
+        x_labels = ('0', '1', '3', '5', '10')
         plt.xticks(x_positions, x_labels, rotation=0)
 
         # Tick vertical lines
-        plt.axvline(x=91.25, color='black', ls='--', alpha=0.2)
-        plt.axvline(x=182.5, color='black', ls='--', alpha=0.2)
         plt.axvline(x=365, color='black', ls='--', alpha=0.2)
-        plt.axvline(x=547.5, color='black', ls='--', alpha=0.2)
-        plt.axvline(x=730, color='black', ls='--', alpha=0.2)
         plt.axvline(x=1095, color='black', ls='--', alpha=0.2)
+        plt.axvline(x=1825, color='black', ls='--', alpha=0.2)
+        plt.axvline(x=3650, color='black', ls='--', alpha=0.2)
 
-        CKDprob_6mo = str(np.round(survival_6mo*100, 1))[1:-1]
-        CKDprob_12mo = str(np.round(survival_12mo*100, 1))[1:-1]
+        CKDprob_1yr = str(np.round(CKD_survival_1yr*100, 1))[1:-1]
+        CKDprob_3yr = str(np.round(CKD_survival_3yr*100, 1))[1:-1]
 
-        col1.write(f"**Probability of avoiding CKD progression at 6 months:** {CKDprob_6mo}")
-        col1.write(f"**Probability of avoiding CKD progression at 12 months:** {CKDprob_12mo}")
+        col1.write(f"**Probability of avoiding CKD progression at 1 year:** {CKDprob_1yr}")
+        col1.write(f"**Probability of avoiding CKD progression at 3 years:** {CKDprob_3yr}")
         if egfr < 15:
             col1.write("""""")
             col1.write("The patient has already progressed to end-stage renal disease based on the information "
