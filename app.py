@@ -14,9 +14,7 @@ def main():
     session_state = SessionState.get(button_id="", color_to_label={})
     PAGES = {
         "PUVOP Tool": full_app,
-        "About": about,
-        "Model development": dev,
-
+        "About": about
     }
     page = st.sidebar.selectbox("Select Page", options=list(PAGES.keys()))
     PAGES[page](session_state)
@@ -259,20 +257,11 @@ def about(session_state):
         """
     **Posterior Urethral Valves Outcomes Prediction (PUVOP): a machine learning tool to predict clinically relevant 
     outcomes in boys with posterior urethral valves**
-    
     *Jethro CC. Kwong, Adree Khondker, Jin Kyu Kim, Michael Chua, Daniel T. Keefe, Joana Dos Santos, Marta Skreta, 
     Lauren Erdman, John Weaver, Gregory Tasian, Chia Wei Teoh, Mandy Rickard, Armando J. Lorenzo*
     
     """
     )
-def dev(session_state):
-    st.markdown(
-        """
-    Under development
-
-    """
-    )
-
 
 if __name__ == "__main__":
     st.set_page_config(page_title="PUVOP - Posterior Urethral Valves Outcome Prediction",
