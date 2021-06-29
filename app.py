@@ -243,8 +243,8 @@ def full_app(session_state):
         CICprob_1yr = str(np.round(CIC_survival_1yr * 100, 1))[1:-1]
         CICprob_3yr = str(np.round(CIC_survival_3yr * 100, 1))[1:-1]
 
-        col3.write(f"**Probability of avoiding RRT at 1 year:** {CICprob_1yr}")
-        col3.write(f"**Probability of avoiding RRT at 3 years:** {CICprob_3yr}")
+        col3.write(f"**Probability of avoiding CIC at 1 year:** {CICprob_1yr}")
+        col3.write(f"**Probability of avoiding CIC at 3 years:** {CICprob_3yr}")
         col3.pyplot(fig3)
 
 
