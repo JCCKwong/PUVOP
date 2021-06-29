@@ -1,3 +1,17 @@
+"""
+Title: Posterior Urethral Valves Outcomes Prediction (PUVOP): a machine learning tool to predict clinically relevant
+outcomes in boys with posterior urethral valves
+
+Authors: Jethro CC. Kwong, Adree Khondker, Jin Kyu Kim, Michael Chua, Daniel T. Keefe, Joana Dos Santos, Marta Skreta,
+Lauren Erdman, John Weaver, Gregory Tasian, Chia Wei Teoh, Mandy Rickard, Armando J. Lorenzo
+
+PUVOP was developed to predict three specific outcomes:
+1. Any decline in renal function, based on CKD stage progression
+2. Need for renal replacement therapy (dialysis or transplant)
+3. Need for clean intermittent catheterization 
+"""
+
+
 import numpy as np
 import pandas as pd
 import streamlit as st
