@@ -8,7 +8,7 @@ Lauren Erdman, John Weaver, Gregory Tasian, Chia Wei Teoh, Mandy Rickard, Armand
 PUVOP was developed to predict three specific outcomes:
 1. Any decline in renal function, based on CKD stage progression
 2. Need for renal replacement therapy (dialysis or transplant)
-3. Need for clean intermittent catheterization 
+3. Need for clean intermittent catheterization
 """
 
 
@@ -23,7 +23,7 @@ from pysurvival.utils import load_model
 
 def main():
     st.title("Posterior Urethral Valves Outcomes Prediction (PUVOP)")
-    st.sidebar.image("SickKids logo.png", use_column_width=True)
+    st.sidebar.image("SickKids CHOP logo.png", use_column_width=True)
     st.sidebar.subheader("Navigation")
     session_state = SessionState.get(button_id="", color_to_label={})
     PAGES = {
