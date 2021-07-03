@@ -256,10 +256,6 @@ def about(session_state):
     * Any decline in renal function, based on CKD stage progression
     * Need for renal replacement therapy (dialysis or transplant)
     * Need for clean intermittent catheterization
-
-    **Model development**: You will find additional details regarding how the model was developed.
-
-    **PUVOP Tool**: You can access our simple-to-use application.
     
     The CKD-progression, renal replacement therapy, and clean intermittent catheterization-free surivival models 
     achieved a c-index of 0.765, 0.952, and 0.700, respectively, and outperformed Cox proportional hazards regression. 
