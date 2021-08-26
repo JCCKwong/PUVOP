@@ -53,7 +53,7 @@ def full_app(session_state):
     """
     )
 
-    col1, col2, col3 = st.beta_columns([1, 1, 1])
+    col1, col2, col3 = st.columns([1, 1, 1])
     col1.header("CKD progression-free survival")
     col1.write("This will predict the probability of your kidney function worsening, based on progression "
                "in stage of chronic kidney disease (CKD).")
