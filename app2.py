@@ -65,9 +65,9 @@ def full_app(session_state):
     col3.write("""""")
 
     # Load saved items from Google Drive
-    CKD_location = st.secrets['CKD']
-    RRT_location = st.secrets['RRT']
-    CIC_location = st.secrets['CIC']
+    #CKD_location = st.secrets['CKD']
+    #RRT_location = st.secrets['RRT']
+    #CIC_location = st.secrets['CIC']
 
     #@st.cache(allow_output_mutation=True)
     CKD_model = load_model('Models/PUV CKD survival.zip')
