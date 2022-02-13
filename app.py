@@ -15,7 +15,7 @@ PUVOP was developed to predict three specific outcomes:
 import numpy as np
 import pandas as pd
 import streamlit as st
-import matplotlib as plt
+import matplotlib.pyplot as plt
 from pathlib import Path
 from google_drive_downloader import GoogleDriveDownloader as gdd
 import SessionState
