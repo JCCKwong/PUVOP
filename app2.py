@@ -70,9 +70,9 @@ def full_app(session_state):
     #CIC_location = st.secrets['CIC']
 
     #@st.cache(allow_output_mutation=True)
-    CKD_model = load_model('Models/PUV CKD survival.zip')
-    RRT_model = load_model('Models/PUV RRT survival.zip')
-    CIC_model = load_model('Models/PUV CIC survival.zip')
+    CKD_model = load_model('Models/PUV CKD survival (1).zip')
+    RRT_model = load_model('Models/PUV RRT survival (1).zip')
+    CIC_model = load_model('Models/PUV CIC survival (1).zip')
 
     # Define choices and labels for feature inputs
     CHOICES = {0: 'No', 1: 'Yes'}
