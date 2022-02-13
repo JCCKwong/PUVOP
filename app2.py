@@ -69,7 +69,7 @@ def full_app(session_state):
     RRT_location = st.secrets['RRT']
     CIC_location = st.secrets['CIC']
 
-    @st.cache(allow_output_mutation=True)
+    #@st.cache(allow_output_mutation=True)
     CKD_model = load_model('Models/PUV CKD survival.zip')
     RRT_model = load_model('Models/PUV RRT survival.zip')
     CIC_model = load_model('Models/PUV CIC survival.zip')
