@@ -1,6 +1,6 @@
 # PUVOP - Posterior Urethral Valves Outcomes Prediction
 
-This is the code repository for the paper: Posterior Urethral Valves Outcomes Prediction (PUVOP): a machine learning tool to predict clinically relevant outcomes in boys with posterior urethral valves
+This is the code repository for the paper: *Posterior Urethral Valves Outcomes Prediction (PUVOP): a machine learning tool to predict clinically relevant outcomes in boys with posterior urethral valves*
 
 PUVOP was published in Pediatric Nephrology on Oct 22nd, 2021 (https://doi.org/10.1007/s00467-021-05321-3).
 
