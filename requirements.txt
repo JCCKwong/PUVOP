@@ -5,3 +5,4 @@ matplotlib==3.3.4
 googledrivedownloader==0.4
 pysurvival==0.1.2
 pickle5==0.0.11
+scikit-learn
