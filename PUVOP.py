@@ -65,7 +65,7 @@ col2.header("Requiring RRT")
 col2.write("This will predict the probability of needing to start renal replacement therapy (RRT), "
            "such as dialysis or transplant.")
 col3.header("Requiring CIC")
-col3.write("This will predict the probability of needing to start clean intermittent catheterization (CIC).")
+col3.write("This will predict the probability of needing to start clean intermittent catheterization (CIC).\n\n")
 
 # Define choices and labels for feature inputs
 CHOICES = {0: 'No', 1: 'Yes'}
