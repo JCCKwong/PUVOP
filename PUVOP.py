@@ -192,10 +192,9 @@ if submitted:
     progress_bar.empty()
 
     # Display results
-    col4, col5, col6 = st.columns([1, 1, 1])
-    col4.pyplot(ckd_fig_individual, use_container_width=True)
-    col4.dataframe(data=ckd_individual_risk, use_container_width=True, hide_index=True)
-    col5.pyplot(rrt_fig_individual, use_container_width=True)
-    col5.dataframe(data=rrt_individual_risk, use_container_width=True, hide_index=True)
-    col6.pyplot(cic_fig_individual, use_container_width=True)
-    col6.dataframe(data=cic_individual_risk, use_container_width=True, hide_index=True)
+    col1.pyplot(ckd_fig_individual, use_container_width=True)
+    col1.dataframe(data=ckd_individual_risk, use_container_width=True, hide_index=True)
+    col2.pyplot(rrt_fig_individual, use_container_width=True)
+    col2.dataframe(data=rrt_individual_risk, use_container_width=True, hide_index=True)
+    col3.pyplot(cic_fig_individual, use_container_width=True)
+    col3.dataframe(data=cic_individual_risk, use_container_width=True, hide_index=True)
