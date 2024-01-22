@@ -53,7 +53,7 @@ st.markdown(
     22 patients were included for external validation. The ML model predicted CKD progression (c-index = 0.77; 
     external C-index = 0.78), KRT (c-index = 0.95; external C-index = 0.89) and indicated CIC (c-index = 0.70; external 
     C-index = 0.64), and all performed better than Cox proportional-hazards regression. The models have been packaged 
-    into a simple easy-to-use tool, available at https://puvop-sickkidsurology.streamlit.app/.\n
+    into a simple easy-to-use tool, available at https://sickkidsurologypuvop.streamlit.app/.\n
     
     **Conclusion**: ML-based approaches for predicting clinically relevant outcomes in PUV are feasible. Further 
     validation is warranted, but this implementable model can act as a decision-making aid. A higher resolution 
