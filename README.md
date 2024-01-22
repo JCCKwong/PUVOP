@@ -6,4 +6,4 @@ PUVOP was published in Pediatric Nephrology on Oct 22nd, 2021 (https://doi.org/1
 
 Authors: Jethro CC. Kwong, Adree Khondker, Jin Kyu Kim, Michael Chua, Daniel T. Keefe, Joana Dos Santos, Marta Skreta, Lauren Erdman, Neeta D’Souza, Antoine Fermin Selman, John Weaver, Dana A. Weiss, Christopher Long, Gregory Tasian, Chia Wei Teoh, Mandy Rickard, Armando J. Lorenzo 
 
-The executable version of the fully trained model can be accessed [here](https://share.streamlit.io/jcckwong/puvop/main/app.py).
+The executable version of the fully trained model can be accessed [here](https://sickkidsurology-puvop.streamlit.app/).
