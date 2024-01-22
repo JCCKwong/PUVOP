@@ -1,4 +1,3 @@
-
 import streamlit as st
 
 st.set_page_config(page_title="PUVOP - Posterior Urethral Valves Outcome Prediction",
@@ -7,7 +6,8 @@ st.set_page_config(page_title="PUVOP - Posterior Urethral Valves Outcome Predict
                    initial_sidebar_state="auto"
                    )
 
-st.title("About PUVOP")
+st.title("Posterior Urethral Valves Outcomes Prediction (PUVOP)")
+st.header("About", divider='gray')
 st.sidebar.image('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/The_Hospital_for_Sick_Children_Logo.svg/'
                  '2560px-The_Hospital_for_Sick_Children_Logo.svg.png',
                  use_column_width=True)
